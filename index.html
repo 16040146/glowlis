@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GlowLis Finance株式会社 ｜ 信頼を、未来へ。</title>
+<meta name="description" content="GlowLis Finance株式会社 ― 資産運用コンサルティング、ファイナンシャルプランニング、法人向け財務アドバイザリー。お客様の資産と未来に、誠実に向き合います。">
+<link rel="icon" href="GlowLis-Finance縦組み.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141d4a;          /* brand deep navy */
+    --ink-2:#0c1233;
+    --ink-soft:#46507c;
+    --accent:#1f6fc4;       /* brand blue */
+    --accent-lt:#37b3e9;    /* cyan glow */
+    --paper:#f2f5fb;
+    --paper-2:#e7edf7;
+    --paper-3:#d9e3f1;
+    --white:#ffffff;
+    --line:rgba(20,29,74,.13);
+    --serif-ja:"Shippori Mincho", serif;
+    --serif-en:"Cormorant Garamond", serif;
+    --sans-ja:"Zen Kaku Gothic New", sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--sans-ja);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.9;
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;z-index:9999;
+    opacity:.03;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection{background:var(--accent);color:var(--white)}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(24px,5vw,64px)}
+
+  /* ---------- Nav ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(24px,5vw,64px);
+    transition:background .5s ease, padding .5s ease, box-shadow .5s ease;
+  }
+  header.nav.scrolled{
+    background:rgba(242,245,251,.85);
+    backdrop-filter:blur(12px);
+    padding:12px clamp(24px,5vw,64px);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .brand{display:flex;align-items:center;text-decoration:none}
+  .brand img{height:38px;width:auto;display:block;transition:height .5s ease}
+  header.nav.scrolled .brand img{height:32px}
+  .navlinks{display:flex;gap:34px;align-items:center}
+  .navlinks a{
+    text-decoration:none;color:var(--ink);font-size:13px;letter-spacing:.14em;
+    font-weight:400;position:relative;padding:4px 0;
+  }
+  .navlinks a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;
+    background:linear-gradient(90deg,var(--accent-lt),var(--accent));transition:width .35s ease;
+  }
+  .navlinks a:hover::after{width:100%}
+  .nav-en{font-family:var(--serif-en);font-style:italic;font-size:15px;color:var(--accent);letter-spacing:.04em}
+  .menu-btn{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px}
+  .menu-btn span{width:24px;height:1.5px;background:var(--ink);display:block;transition:.3s}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;
+    background:
+      radial-gradient(130% 95% at 88% 6%, rgba(55,179,233,.16), transparent 52%),
+      radial-gradient(90% 80% at 10% 100%, rgba(31,111,196,.10), transparent 60%),
+      linear-gradient(180deg,var(--paper) 0%, var(--paper-2) 100%);
+    overflow:hidden;
+  }
+  .hero .chart{
+    position:absolute;right:-4%;bottom:0;width:62%;max-width:860px;opacity:.6;
+    pointer-events:none;
+  }
+  .hero .chart path.line{
+    fill:none;stroke:url(#g1);stroke-width:1.6;
+    stroke-dasharray:2600;stroke-dashoffset:2600;
+    animation:draw 3.4s 1s cubic-bezier(.6,.05,.2,1) forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .hero-inner{position:relative;z-index:2;padding-top:120px;padding-bottom:60px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:14px;
+    font-family:var(--serif-en);font-style:italic;font-size:17px;color:var(--accent);
+    letter-spacing:.04em;margin-bottom:30px;
+    opacity:0;animation:rise .9s .2s forwards;
+  }
+  .eyebrow::before{content:"";width:46px;height:1px;background:var(--accent)}
+  .hero h1{
+    font-family:var(--serif-ja);font-weight:600;
+    font-size:clamp(40px,7.2vw,92px);line-height:1.18;letter-spacing:.02em;
+    color:var(--ink);
+  }
+  .hero h1 .l{display:block;opacity:0;transform:translateY(28px);animation:rise 1s forwards}
+  .hero h1 .l:nth-child(1){animation-delay:.35s}
+  .hero h1 .l:nth-child(2){animation-delay:.55s}
+  .hero h1 .l em{font-style:normal;background:linear-gradient(120deg,var(--accent-lt),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p.lead{
+    margin-top:38px;max-width:30em;font-size:clamp(15px,1.5vw,18px);
+    color:var(--ink-soft);font-weight:300;line-height:2.1;
+    opacity:0;animation:rise 1s .8s forwards;
+  }
+  .hero .cta{
+    margin-top:46px;display:flex;gap:18px;flex-wrap:wrap;
+    opacity:0;animation:rise 1s 1s forwards;
+  }
+  @keyframes rise{to{opacity:1;transform:translateY(0)}}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:11px;text-decoration:none;
+    font-size:14px;letter-spacing:.1em;font-weight:400;padding:16px 30px;
+    border:1px solid var(--ink);color:var(--ink);background:transparent;
+    transition:.4s ease;position:relative;overflow:hidden;
+  }
+  .btn .ar{transition:transform .4s ease}
+  .btn:hover .ar{transform:translateX(5px)}
+  .btn.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn.solid:hover{background:var(--accent);border-color:var(--accent)}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper)}
+
+  .scroll-cue{
+    position:absolute;left:clamp(24px,5vw,64px);bottom:34px;z-index:3;
+    font-family:var(--serif-en);font-style:italic;font-size:13px;color:var(--ink-soft);
+    letter-spacing:.1em;display:flex;align-items:center;gap:12px;
+    opacity:0;animation:rise 1s 1.4s forwards;
+  }
+  .scroll-cue .bar{width:1px;height:40px;background:var(--line);position:relative;overflow:hidden}
+  .scroll-cue .bar::after{content:"";position:absolute;top:-40px;left:0;width:1px;height:40px;background:var(--accent);animation:slide 2.4s ease-in-out infinite}
+  @keyframes slide{0%{top:-40px}60%,100%{top:40px}}
+
+  /* ---------- Section base ---------- */
+  section{position:relative;padding:clamp(80px,12vw,150px) 0}
+  .sec-no{
+    font-family:var(--serif-en);font-size:15px;color:var(--accent);letter-spacing:.18em;
+    font-style:italic;display:block;margin-bottom:18px;
+  }
+  .sec-title{
+    font-family:var(--serif-ja);font-weight:600;
+    font-size:clamp(28px,4vw,46px);line-height:1.35;letter-spacing:.03em;margin-bottom:26px;
+  }
+  .sec-title .en{
+    display:block;font-family:var(--serif-en);font-style:italic;font-weight:400;
+    font-size:.5em;color:var(--accent);letter-spacing:.05em;margin-top:8px;
+  }
+
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.12s}
+  .reveal.d2{transition-delay:.24s}
+  .reveal.d3{transition-delay:.36s}
+
+  /* ---------- Philosophy ---------- */
+  .philosophy{background:linear-gradient(180deg,var(--paper-2),var(--paper))}
+  .phil-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(40px,7vw,100px);align-items:center}
+  .phil-quote{
+    font-family:var(--serif-ja);font-weight:500;
+    font-size:clamp(26px,3.4vw,40px);line-height:1.7;letter-spacing:.04em;
+  }
+  .phil-quote em{font-style:normal;background:linear-gradient(120deg,var(--accent-lt),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .phil-body p{color:var(--ink-soft);font-size:16px;line-height:2.2;margin-bottom:22px}
+  .phil-body p:last-child{margin-bottom:0}
+  .phil-sign{margin-top:30px;font-family:var(--serif-en);font-style:italic;color:var(--accent)}
+
+  /* ---------- Services ---------- */
+  .services{background:var(--ink);color:var(--paper)}
+  .services .sec-title{color:var(--white)}
+  .services .head{max-width:640px;margin-bottom:64px}
+  .services .head p{color:rgba(242,245,251,.66);font-size:16px;margin-top:8px}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(242,245,251,.13);border:1px solid rgba(242,245,251,.13)}
+  .svc{
+    background:var(--ink);padding:46px 38px;position:relative;
+    transition:background .5s ease;min-height:320px;display:flex;flex-direction:column;
+  }
+  .svc:hover{background:var(--ink-2)}
+  .svc .num{font-family:var(--serif-en);font-style:italic;font-size:16px;color:var(--accent-lt);letter-spacing:.1em}
+  .svc .ico{margin:28px 0 22px;color:var(--accent-lt)}
+  .svc h3{font-family:var(--serif-ja);font-weight:500;font-size:23px;letter-spacing:.04em;margin-bottom:16px;color:var(--white)}
+  .svc p{color:rgba(242,245,251,.64);font-size:14.5px;line-height:2;font-weight:300}
+  .svc .line{position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--accent-lt),var(--accent));transition:width .5s ease}
+  .svc:hover .line{width:100%}
+
+  /* ---------- Message ---------- */
+  .message{background:linear-gradient(180deg,var(--paper),var(--paper-2))}
+  .msg-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(40px,6vw,80px);align-items:start}
+  .msg-portrait{position:relative}
+  .msg-portrait .frame{
+    aspect-ratio:3/4;background:linear-gradient(160deg,var(--accent-lt),var(--ink));
+    position:relative;overflow:hidden;border:1px solid var(--line);
+  }
+  .msg-portrait .frame .initials{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif-en);font-size:120px;color:rgba(255,255,255,.5);font-style:italic;
+  }
+  .msg-portrait .frame img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;
+  }
+  .msg-portrait .tag{
+    position:absolute;left:-1px;bottom:26px;background:var(--accent);color:var(--white);
+    padding:13px 24px;font-size:13px;letter-spacing:.1em;
+  }
+  .msg-portrait .tag b{font-family:var(--serif-ja);font-weight:600;font-size:18px;display:block;letter-spacing:.06em}
+  .msg-body .sec-title{margin-bottom:30px}
+  .msg-body p{color:var(--ink-soft);font-size:16px;line-height:2.25;margin-bottom:22px}
+  .msg-body .sign{
+    margin-top:36px;display:flex;align-items:baseline;gap:16px;
+    border-top:1px solid var(--line);padding-top:26px;
+  }
+  .msg-body .sign .role{font-size:13px;letter-spacing:.12em;color:var(--ink-soft)}
+  .msg-body .sign .nm{font-family:var(--serif-ja);font-weight:600;font-size:26px;letter-spacing:.08em}
+
+  /* ---------- Company profile ---------- */
+  .profile{background:var(--paper-2)}
+  .prof-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:clamp(40px,6vw,90px)}
+  table.prof{width:100%;border-collapse:collapse}
+  table.prof th,table.prof td{
+    text-align:left;padding:22px 4px;border-bottom:1px solid var(--line);
+    font-weight:300;font-size:15.5px;vertical-align:top;
+  }
+  table.prof th{
+    width:30%;color:var(--ink);font-weight:500;letter-spacing:.06em;
+    font-family:var(--serif-ja);
+  }
+  table.prof td{color:var(--ink-soft);line-height:1.9}
+  table.prof td b{font-weight:500;color:var(--ink)}
+  .prof .note{margin-top:18px;font-size:12.5px;color:var(--ink-soft);opacity:.7}
+
+  /* ---------- Contact / CTA ---------- */
+  .contact{background:var(--ink);color:var(--paper);text-align:center;overflow:hidden;position:relative}
+  .contact::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(80% 120% at 50% -10%, rgba(55,179,233,.28), transparent 60%);
+  }
+  .contact .inner{position:relative;z-index:2;max-width:700px;margin:0 auto}
+  .contact .en{font-family:var(--serif-en);font-style:italic;color:var(--accent-lt);font-size:18px;letter-spacing:.05em}
+  .contact h2{font-family:var(--serif-ja);font-weight:500;font-size:clamp(30px,5vw,56px);line-height:1.4;margin:18px 0 22px;color:var(--white)}
+  .contact p{color:rgba(242,245,251,.72);margin-bottom:42px;font-size:16px}
+  .contact .btn{border-color:var(--accent-lt);color:var(--paper)}
+  .contact .btn.solid{background:var(--accent);border-color:var(--accent);color:var(--white)}
+  .contact .btn.solid:hover{background:var(--accent-lt);border-color:var(--accent-lt)}
+  .contact .btn.ghost:hover{background:var(--paper);color:var(--ink)}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink-2);color:rgba(242,245,251,.58);padding:60px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(242,245,251,.1)}
+  .foot-brand .logo-chip{background:var(--white);display:inline-block;padding:14px 20px;border-radius:4px}
+  .foot-brand .logo-chip img{height:34px;width:auto;display:block}
+  .foot-brand p{font-size:13.5px;margin-top:18px;max-width:24em;line-height:1.9}
+  .foot-links{display:flex;gap:50px;flex-wrap:wrap}
+  .foot-col h4{font-size:12px;letter-spacing:.16em;color:var(--accent-lt);margin-bottom:16px;font-weight:500}
+  .foot-col a{display:block;color:rgba(242,245,251,.62);text-decoration:none;font-size:14px;margin-bottom:11px;transition:color .3s}
+  .foot-col a:hover{color:var(--paper)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;flex-wrap:wrap;gap:12px}
+  .foot-bottom small{font-size:12px;letter-spacing:.04em}
+  .foot-bottom .en{font-family:var(--serif-en);font-style:italic;color:var(--accent-lt)}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:880px){
+    .navlinks{
+      position:fixed;inset:0 0 0 auto;width:min(78vw,340px);background:var(--ink);
+      flex-direction:column;justify-content:center;gap:30px;padding:40px;
+      transform:translateX(100%);transition:transform .5s cubic-bezier(.7,0,.2,1);
+    }
+    .navlinks.open{transform:translateX(0)}
+    .navlinks a{color:var(--paper);font-size:16px}
+    .menu-btn{display:flex;z-index:101}
+    .menu-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+    .menu-btn.open span:nth-child(2){opacity:0}
+    .menu-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+    .phil-grid,.svc-grid,.msg-grid,.prof-grid{grid-template-columns:1fr;gap:40px}
+    .svc-grid{border:none}
+    .svc{border:1px solid rgba(242,245,251,.13)}
+    .msg-portrait .frame{max-width:320px}
+    .hero .chart{width:120%;opacity:.35}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand">
+    <img src="GlowLis-Finance横組み.png" alt="GlowLis Finance">
+  </a>
+  <nav class="navlinks" id="navlinks">
+    <a href="#philosophy">理念</a>
+    <a href="#services">事業内容</a>
+    <a href="#message">代表挨拶</a>
+    <a href="#profile">会社概要</a>
+    <a href="#contact" class="nav-en">Contact</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <svg class="chart" viewBox="0 0 860 460" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#1f6fc4"/>
+        <stop offset="1" stop-color="#37b3e9"/>
+      </linearGradient>
+    </defs>
+    <path class="line" d="M0 410 C 90 400 140 350 210 360 S 330 300 400 250 S 540 230 620 150 S 760 120 860 40"/>
+    <path class="line" style="stroke:rgba(20,29,74,.18);animation-delay:1.3s" d="M0 440 C 110 430 170 410 250 400 S 380 360 470 330 S 620 290 720 230 S 800 200 860 170"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">GlowLis Finance Co., Ltd.</span>
+    <h1>
+      <span class="l">信頼を礎に、</span>
+      <span class="l"><em>資産</em>の未来を描く。</span>
+    </h1>
+    <p class="lead">
+      一人ひとりの想いと、企業の歩む道のり。<br>
+      私たちGlowLis Financeは、確かな知見と誠実な対話で、<br>
+      お客様の大切な資産と未来に静かに寄り添います。
+    </p>
+    <div class="cta">
+      <a href="#services" class="btn solid">事業内容を見る <span class="ar">→</span></a>
+      <a href="#contact" class="btn ghost">ご相談はこちら</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="bar"></span>Scroll</div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="wrap phil-grid">
+    <div class="reveal">
+      <span class="sec-no">01 — Philosophy</span>
+      <p class="phil-quote">お金の先にある、<br><em>人生の選択肢</em>を<br>ひろげる。</p>
+    </div>
+    <div class="phil-body reveal d1">
+      <p>資産運用は、数字を増やすことが目的ではありません。お客様が望む暮らし、家族の安心、事業の成長――その実現のための「手段」です。</p>
+      <p>GlowLis Financeは、流行や短期的な利益に流されることなく、お客様一人ひとりの価値観に深く耳を傾けます。長期的な視点に立ち、リスクと向き合いながら、最適なかたちを共に考え抜く。それが私たちの役割です。</p>
+      <p>「灯（Glow）」のように、不確かな時代にあっても進むべき道をそっと照らす存在でありたい。その想いを社名に込めています。</p>
+      <p class="phil-sign">— Lighting the path to your future.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="sec-no">02 — Services</span>
+      <h2 class="sec-title">事業内容<span class="en">What we do</span></h2>
+      <p>個人のライフプランから法人の財務戦略まで。お客様の状況に応じた、一貫したファイナンシャル・ソリューションをご提供します。</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <span class="num">01</span>
+        <div class="ico">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 30 L16 20 L23 26 L34 12"/><circle cx="34" cy="12" r="2.2" fill="currentColor" stroke="none"/><path d="M6 10 L6 34 L34 34"/></svg>
+        </div>
+        <h3>資産運用<br>コンサルティング</h3>
+        <p>お客様の目標とリスク許容度を丁寧に分析し、長期・分散・積立を基本としたポートフォリオを設計。市場環境に応じた継続的な見直しまで伴走します。</p>
+        <span class="line"></span>
+      </div>
+      <div class="svc reveal d1">
+        <span class="num">02</span>
+        <div class="ico">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="8" y="6" width="24" height="28"/><path d="M14 14 H26 M14 20 H26 M14 26 H22"/></svg>
+        </div>
+        <h3>ファイナンシャル<br>プランニング</h3>
+        <p>住宅・教育・退職・相続といったライフイベントを見据え、家計のキャッシュフローを可視化。お客様だけの「人生の設計図」を描きます。</p>
+        <span class="line"></span>
+      </div>
+      <div class="svc reveal d2">
+        <span class="num">03</span>
+        <div class="ico">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20 5 L33 11 V21 C33 29 27 34 20 36 C13 34 7 29 7 21 V11 Z"/><path d="M15 20 l4 4 l7 -8"/></svg>
+        </div>
+        <h3>法人向け<br>財務アドバイザリー</h3>
+        <p>資金調達、事業承継、福利厚生制度の設計など、企業経営に伴う財務課題に対応。経営者のパートナーとして、持続的な成長を支えます。</p>
+        <span class="line"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MESSAGE -->
+<section class="message" id="message">
+  <div class="wrap msg-grid">
+    <div class="msg-portrait reveal">
+      <div class="frame">
+        <img src="pic.webp" alt="代表取締役 森田 英孝">
+      </div>
+      <div class="tag">代表取締役<b>森田 英孝</b></div>
+    </div>
+    <div class="msg-body reveal d1">
+      <span class="sec-no">03 — Message</span>
+      <h2 class="sec-title">代表挨拶<span class="en">Message from the President</span></h2>
+      <p>このたびはGlowLis Finance株式会社のページをご覧いただき、誠にありがとうございます。</p>
+      <p>金融を取り巻く環境は、かつてないスピードで変化を続けています。情報があふれる時代だからこそ、お客様にとって本当に必要なものは何かを見極め、誠実にお伝えすることが私たちの使命だと考えています。</p>
+      <p>私たちが大切にしているのは、目先の利益ではなく、お客様との長く確かな信頼関係です。一つひとつのご相談に真摯に向き合い、お客様の人生や事業の節目に、安心して頼っていただける存在であり続けたい。社員一同、その想いを胸に歩んでまいります。</p>
+      <p>皆様の未来がより豊かなものとなるよう、全力で支えてまいります。</p>
+      <div class="sign">
+        <span class="role">代表取締役</span>
+        <span class="nm">森田 英孝<span style="display:block;font-family:var(--serif-en);font-style:italic;font-size:12px;letter-spacing:.18em;color:var(--ink-soft);margin-top:4px">Morita Hidetaka</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile" id="profile">
+  <div class="wrap prof-grid">
+    <div class="reveal">
+      <span class="sec-no">04 — Company</span>
+      <h2 class="sec-title">会社概要<span class="en">Corporate Profile</span></h2>
+    </div>
+    <div class="reveal d1">
+      <table class="prof">
+        <tr><th>商号</th><td><b>GlowLis Finance株式会社</b><br>（GlowLis Finance Co., Ltd.）</td></tr>
+        <tr><th>代表者</th><td>代表取締役　森田 英孝（Morita Hidetaka）</td></tr>
+        <tr><th>事業内容</th><td>資産運用コンサルティング<br>ファイナンシャルプランニング<br>法人向け財務アドバイザリー</td></tr>
+        <!-- 設立年月が確定したら下記のコメントを外して値を記入してください
+        <tr><th>設立</th><td>20XX年X月</td></tr>
+        -->
+        <tr><th>資本金</th><td>10,000,000円</td></tr>
+        <tr><th>所在地</th><td>〒151-0053　東京都渋谷区代々木1-32-11 Kビル8F</td></tr>
+        <tr><th>お問い合わせ</th><td>info@glowlis.com</td></tr>
+        <tr><th>URL</th><td>https://glowlis.com</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap inner">
+    <span class="en">Contact</span>
+    <h2>未来の選択を、<br>一緒に考えませんか。</h2>
+    <p>資産運用やライフプラン、法人の財務に関するご相談は、お気軽にお問い合わせください。<br>初回のご相談は無料で承っております。</p>
+    <div class="cta" style="justify-content:center;display:flex;gap:18px;flex-wrap:wrap">
+      <a href="mailto:info@glowlis.com" class="btn solid">メールで相談する <span class="ar">→</span></a>
+      <a href="#top" class="btn ghost">ページ上部へ</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="logo-chip"><img src="GlowLis-Finance横組み.png" alt="GlowLis Finance"></span>
+        <p>信頼を礎に、お客様の資産と未来に寄り添うファイナンシャル・パートナー。</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4>NAVIGATION</h4>
+          <a href="#philosophy">理念</a>
+          <a href="#services">事業内容</a>
+          <a href="#message">代表挨拶</a>
+          <a href="#profile">会社概要</a>
+        </div>
+        <div class="foot-col">
+          <h4>CONTACT</h4>
+          <a href="mailto:info@glowlis.com">info@glowlis.com</a>
+          <a href="https://glowlis.com">glowlis.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <small>© <span id="yr"></span> GlowLis Finance株式会社 All Rights Reserved.</small>
+      <small class="en">Lighting the path to your future.</small>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+  const btn=document.getElementById('menuBtn'),links=document.getElementById('navlinks');
+  btn.addEventListener('click',()=>{btn.classList.toggle('open');links.classList.toggle('open')});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{btn.classList.remove('open');links.classList.remove('open')}));
+
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+  },{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
